@@ -1,0 +1,496 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Balina</title>
+
+<style>
+:root {
+  --black: #111111;
+  --black-soft: #1b1b1b;
+  --gold: #c9a227;
+  --gold-light: #e5c158;
+  --white: #ffffff;
+  --bg: #f6f6f4;
+  --text: #222222;
+  --muted: #777777;
+  --green: #25d366;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+header {
+  background: linear-gradient(145deg, #0d0d0d, #202020);
+  color: white;
+  padding: 24px 18px 20px;
+  text-align: center;
+  border-bottom: 3px solid var(--gold);
+  box-shadow: 0 4px 18px rgba(0,0,0,.15);
+}
+
+header h1 {
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--gold-light);
+  letter-spacing: 2px;
+  margin-bottom: 5px;
+}
+
+header p {
+  color: #d4d4d4;
+  font-size: 14px;
+}
+
+.search {
+  background: white;
+  padding: 14px 15px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+}
+
+.search input {
+  width: 100%;
+  padding: 14px 17px;
+  border: 1px solid #e0e0e0;
+  border-radius: 14px;
+  background: #f8f8f8;
+  color: #222;
+  font-size: 16px;
+  transition: .2s;
+}
+
+.search input:focus {
+  outline: none;
+  background: white;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,162,39,.12);
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 18px 15px 35px;
+}
+
+h2 {
+  margin: 24px 0 14px;
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+h2::before {
+  content: "";
+  width: 5px;
+  height: 25px;
+  background: var(--gold);
+  border-radius: 5px;
+}
+
+.categories {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 4px 2px 12px;
+  scrollbar-width: none;
+}
+
+.categories::-webkit-scrollbar {
+  display: none;
+}
+
+.category {
+  min-width: 125px;
+  background: white;
+  padding: 16px 12px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 3px 12px rgba(0,0,0,.06);
+  border: 1px solid #eeeeee;
+  font-weight: 800;
+  cursor: pointer;
+  transition: .2s;
+  white-space: nowrap;
+}
+
+.category:active {
+  transform: scale(.96);
+  border-color: var(--gold);
+}
+
+.category.active {
+  background: var(--black);
+  color: var(--gold-light);
+  border-color: var(--gold);
+}
+
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 13px;
+}
+
+.product {
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 5px 18px rgba(0,0,0,.08);
+  border: 1px solid #eeeeee;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.product:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+}
+
+.product:active {
+  transform: scale(.98);
+}
+.product-image {
+  height: 190px;
+  background: #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.product-image a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .3s;
+}
+
+.product:active .product-image img {
+  transform: scale(1.03);
+}
+
+.product-info {
+  padding: 12px;
+}
+
+.product h3 {
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 7px;
+  color: var(--black);
+}
+
+.price {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--gold);
+  margin-bottom: 8px;
+  letter-spacing: .3px;
+}
+.condition {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 11px;
+  font-weight: 600;
+}
+.whatsapp {
+  display: block;
+  width: 100%;
+  padding: 12px 8px;
+  border-radius: 11px;
+  background: var(--green);
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 800;
+  transition: .2s;
+  box-shadow: 0 3px 8px rgba(37,211,102,.18);
+}
+
+.whatsapp:hover {
+  transform: translateY(-1px);
+}
+
+.whatsapp:active {
+  transform: scale(.97);
+}
+.footer {
+  background: #111111;
+  color: white;
+  text-align: center;
+  padding: 35px 20px 20px;
+  margin-top: 35px;
+  border-top: 3px solid var(--gold);
+}
+
+.footer-logo {
+  color: var(--gold-light);
+  font-size: 26px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.footer p {
+  color: #cccccc;
+  font-size: 14px;
+  margin-bottom: 22px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.footer-links span {
+  color: #dddddd;
+  font-size: 13px;
+}
+
+.footer-whatsapp {
+  display: inline-block;
+  background: #25D366;
+  color: white;
+  text-decoration: none;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.footer-copy {
+  color: #888888;
+  font-size: 11px;
+  margin-top: 25px;
+}
+.hero {
+  background: linear-gradient(135deg, #111111, #252525);
+  color: white;
+  border-radius: 20px;
+  padding: 28px 22px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,.12);
+  border: 1px solid rgba(201,162,39,.35);
+}
+
+.hero::after {
+  content: "🛍️";
+  position: absolute;
+  left: 18px;
+  bottom: -15px;
+  font-size: 85px;
+  opacity: .12;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content span {
+  color: var(--gold-light);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.hero-title {
+  color: white;
+  margin: 7px 0;
+  font-size: 32px;
+  font-weight: 900;
+}
+
+.hero-content p {
+  color: #eeeeee;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.hero-content small {
+  color: #bdbdbd;
+  font-size: 12px;
+}
+
+@media (min-width: 700px) {
+  .categories {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .products {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .product-image {
+    height: 230px;
+  }
+}
+  </style>
+
+</head>
+
+<body>
+
+<header>
+  <h1>Balina 🛍️</h1>
+  <p>لقاها فالبال... تلقاها فـ Balina</p>
+</header>
+
+<div class="search">
+<input type="text" id="searchInput" placeholder="🔎 قلب على السلعة..."></div>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="hero-content">
+      <span>✨ مرحباً بك في</span>
+<div class="hero-title">Balina</div>
+      <p>لقاها فالبال... تلقاها فـ Balina</p>
+      <small>ملابس • صبابط • إلكترونيات • أثاث</small>
+    </div>
+  </div>
+
+  <h2>الأقسام</h2>
+
+  <div class="categories">
+<div class="category" data-category="الكل">🛍️ الكل</div>
+<div class="category" data-category="ملابس">👕 ملابس</div>
+<div class="category" data-category="صبابط">👟 صبابط</div>
+<div class="category" data-category="إلكترونيات">📱 إلكترونيات</div>
+<div class="category" data-category="أثاث">🪑 أثاث</div>
+  </div>
+
+  <h2>آخر المنتجات</h2>
+
+  <div class="products">
+
+
+</div>
+<div id="emptyMessage" style="display:none; text-align:center; padding:35px 15px; margin-top:15px; background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,.08); font-size:16px; font-weight:700;"></div>
+</body>
+</html>
+<script>
+const searchInput = document.getElementById('searchInput');
+let selectedCategory = 'الكل';
+searchInput.addEventListener('input', function () {
+  const search = this.value.toLowerCase();
+
+  document.querySelectorAll('.product').forEach(function (product) {
+    const name = product.querySelector('h3').textContent.toLowerCase();
+
+    if (name.includes(search)) {
+      product.style.display = '';
+    } else {
+      product.style.display = 'none';
+    }
+  });
+});
+document.querySelectorAll('.category').forEach(function (category) {
+  category.addEventListener('click', function () {
+ selectedCategory = this.dataset.category;
+const products = document.querySelectorAll('.product');
+let found = false;
+if (selectedCategory === 'الكل') {
+  products.forEach(function (product) {
+    product.style.display = '';
+  });
+document.getElementById('emptyMessage').style.display = 'none';
+  return;
+}
+    document.querySelectorAll('.product').forEach(function (product) {
+      const productCategory = product.querySelector('.product-info').dataset.category;
+
+if (productCategory === selectedCategory) {
+  product.style.display = '';
+  found = true;
+} else {
+  product.style.display = 'none';
+}
+    });
+if (found) {
+  document.getElementById('emptyMessage').style.display = 'none';
+}
+if (!found) {
+document.getElementById('emptyMessage').textContent = '😕 ما كاين حتى منتج فهاد القسم حالياً، رجع قريب إن شاء الله ❤️';
+document.getElementById('emptyMessage').style.display = 'block';
+} 
+ });
+});
+fetch('/api/products')
+  .then(response => response.json())
+  .then(products => {
+    const container = document.querySelector('.products');
+
+    container.innerHTML = '';
+
+    products.forEach(product => {
+      const card = document.createElement('div');
+      card.className = 'product';
+card.innerHTML = `
+  <div class="product-image">
+    <a href="product.html?id=${product.id}">
+<img src="${product.image ? 'images/' + product.image : 'images/balina-placeholder.svg'}" alt="${product.name}" style="width:100%;height:100%;object-fit:cover;">
+    </a>
+  </div>
+<div class="product-info" data-category="${product.category}">
+
+  <a href="product.html?id=${product.id}" style="text-decoration:none;color:inherit;">
+      <h3>${product.name}</h3>
+    </a>
+
+    <div class="price">${product.price} درهم</div>
+
+    <div class="condition">الحالة: ${product.condition} 👍</div>
+
+    <a class="whatsapp" href="https://wa.me/212687395300?text=السلام%20عليكم،%20بغيت%20نطلب%20${encodeURIComponent(product.name)}%20بثمن%20${product.price}%20درهم%20من%20Balina" target="_blank">
+      📲 طلب عبر WhatsApp
+    </a>
+  </div>
+`;
+  container.appendChild(card);
+    });
+  });</script>
+<footer class="footer">
+  <div class="footer-logo">Balina 🛍️</div>
+  <p>لقاها فالبال... تلقاها فـ Balina</p>
+  <div class="footer-links">
+    <span>ملابس</span>
+    <span>صبابط</span>
+    <span>إلكترونيات</span>
+    <span>أثاث</span>
+  </div>
+<a class="footer-whatsapp" href="https://wa.me/212687395300?text=السلام%20عليكم،%20بغيت%20نتواصل%20مع%20Balina%20للاستفسار." target="_blank">📲 تواصل معنا عبر WhatsApp</a>
+  <div class="footer-copy">© 2026 Balina — جميع الحقوق محفوظة</div>
+</footer>
+</html>

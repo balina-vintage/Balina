@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تعديل المنتج - Balina</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f7f7f7;
+  color: #222;
+}
+
+.header {
+  background: #111;
+  color: white;
+  padding: 18px;
+  text-align: center;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 0 15px 40px;
+}
+
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+label {
+  display: block;
+  margin: 14px 0 7px;
+  font-weight: bold;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: inherit;
+}
+
+textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.images-title {
+  margin-top: 22px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.images-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.image-box {
+  background: #f2f2f2;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+
+.image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.no-image {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  font-size: 14px;
+}
+
+.help {
+  font-size: 13px;
+  color: #777;
+  margin-top: 7px;
+}
+
+#selectedPreview {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.preview-box {
+  position: relative;
+  background: #eee;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+
+.preview-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.preview-number {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  background: rgba(0,0,0,.7);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+button {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 15px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.save-btn {
+  background: #111;
+  color: white;
+}
+
+.back-btn {
+  background: #e9e9e9;
+  color: #222;
+}
+
+.status {
+  text-align: center;
+  margin-top: 15px;
+  font-weight: bold;
+  min-height: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>تعديل المنتج</h1>
+</div>
+
+<div class="container">
+
+  <div class="card">
+
+    <label>اسم المنتج</label>
+    <input type="text" id="productName" placeholder="اسم المنتج">
+
+    <label>الثمن</label>
+    <input type="number" id="productPrice" placeholder="الثمن بالدرهم">
+
+    <label>الحالة</label>
+    <select id="productCondition">
+      <option value="">اختار الحالة</option>
+      <option value="مزيانة">مزيانة</option>
+      <option value="جديدة">جديدة</option>
+      <option value="متوسطة">متوسطة</option>
+    </select>
+
+    <label>الوصف</label>
+    <textarea id="productDescription" placeholder="وصف المنتج"></textarea>
+
+    <div class="images-title">
+      الصور الحالية
+    </div>
+
+    <div id="currentImages" class="images-grid"></div>
+
+    <label>تبديل الصور</label>
+
+    <input
+      type="file"
+      id="imageFiles"
+      accept="image/*"
+      multiple
+    >
+
+    <div class="help">
+      تقدر تختار حتى 4 صور. إلا ما اخترتي حتى صورة، غادي يبقاو الصور القديمة.
+    </div>
+
+    <div id="selectedPreview"></div>
+
+    <button class="save-btn" onclick="saveEdit()">
+      💾 حفظ التعديلات
+    </button>
+
+    <button class="back-btn" onclick="history.back()">
+      رجوع
+    </button>
+
+    <div id="status" class="status"></div>
+
+  </div>
+
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+const productId = Number(params.get("id"));
+
+let currentProduct = null;
+
+
+// تحميل المنتج
+async function loadProduct() {
+
+  try {
+
+    const response = await fetch("/api/products");
+    const products = await response.json();
+
+    currentProduct = products.find(
+      product => Number(product.id) === productId
+    );
+
+    if (!currentProduct) {
+      alert("المنتج ما تلقاش");
+      return;
+    }
+
+    document.getElementById("productName").value =
+      currentProduct.name || "";
+
+    document.getElementById("productPrice").value =
+      currentProduct.price || "";
+
+    document.getElementById("productCondition").value =
+      currentProduct.condition || "";
+
+    document.getElementById("productDescription").value =
+      currentProduct.description || "";
+
+    showCurrentImages();
+
+  } catch (error) {
+
+    console.error(error);
+    alert("وقع مشكل في تحميل المنتج");
+
+  }
+}
+
+
+// عرض الصور الحالية
+function showCurrentImages() {
+
+  const container = document.getElementById("currentImages");
+
+  container.innerHTML = "";
+
+  let images = [];
+
+  if (Array.isArray(currentProduct.images)) {
+
+    images = currentProduct.images;
+
+  } else if (currentProduct.image) {
+
+    images = [currentProduct.image];
+
+  }
+
+  if (images.length === 0) {
+
+    container.innerHTML = `
+      <div class="image-box">
+        <div class="no-image">
+          ماكايناش صورة
+        </div>
+      </div>
+    `;
+
+    return;
+  }
+
+  images.slice(0, 4).forEach((image, index) => {
+
+    const box = document.createElement("div");
+    box.className = "image-box";
+
+    box.innerHTML = `
+      <img src="/images/${image}" alt="صورة ${index + 1}">
+    `;
+
+    container.appendChild(box);
+
+  });
+}
+
+
+// معاينة الصور الجديدة
+document.getElementById("imageFiles").addEventListener("change", function() {
+
+  const files = Array.from(this.files);
+
+  if (files.length > 4) {
+
+    alert("مسموح غير بـ 4 صور كحد أقصى");
+
+    this.value = "";
+    document.getElementById("selectedPreview").innerHTML = "";
+
+    return;
+  }
+
+  const preview = document.getElementById("selectedPreview");
+
+  preview.innerHTML = "";
+
+  files.forEach((file, index) => {
+
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+
+      const box = document.createElement("div");
+      box.className = "preview-box";
+
+      box.innerHTML = `
+        <img src="${event.target.result}">
+        <div class="preview-number">
+          ${index + 1}
+        </div>
+      `;
+
+      preview.appendChild(box);
+
+    };
+
+    reader.readAsDataURL(file);
+
+  });
+
+});
+
+
+// حفظ التعديلات
+async function saveEdit() {
+
+  const status = document.getElementById("status");
+
+  status.textContent = "جاري الحفظ...";
+
+  try {
+
+    const files = Array.from(
+      document.getElementById("imageFiles").files
+    );
+
+    let images = [];
+
+    // إذا اختار المستخدم صور جديدة
+    if (files.length > 0) {
+
+      if (files.length > 4) {
+
+        alert("مسموح غير بـ 4 صور");
+        status.textContent = "";
+        return;
+
+      }
+
+      const formData = new FormData();
+
+      files.forEach(file => {
+        formData.append("images", file);
+      });
+
+      const uploadResponse = await fetch("/api/upload", {
+        method: "POST",
+        body: formData
+      });
+
+      if (!uploadResponse.ok) {
+        throw new Error("فشل رفع الصور");
+      }
+
+      const uploadData = await uploadResponse.json();
+
+      images = uploadData.filenames || [];
+
+    } else {
+
+      // الاحتفاظ بالصور القديمة
+      if (Array.isArray(currentProduct.images)) {
+
+        images = currentProduct.images;
+
+      } else if (currentProduct.image) {
+
+        images = [currentProduct.image];
+
+      }
+
+    }
+
+
+    const updatedProduct = {
+
+      name: document.getElementById("productName").value.trim(),
+
+      price: Number(
+        document.getElementById("productPrice").value
+      ),
+
+      condition:
+        document.getElementById("productCondition").value,
+
+      description:
+        document.getElementById("productDescription").value.trim(),
+
+      images: images,
+
+      image: images.length > 0 ? images[0] : ""
+
+    };
+
+
+    const response = await fetch(
+      "/api/products/" + productId,
+      {
+        method: "PUT",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify(updatedProduct)
+      }
+    );
+
+
+    if (!response.ok) {
+      throw new Error("فشل حفظ المنتج");
+    }
+
+
+    status.textContent = "✅ تم حفظ التعديلات بنجاح";
+
+    setTimeout(() => {
+
+      window.location.href = "admin.html";
+
+    }, 1000);
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    status.textContent = "❌ وقع مشكل أثناء الحفظ";
+
+    alert("وقع مشكل أثناء حفظ التعديلات");
+
+  }
+
+}
+
+
+// تشغيل الصفحة
+loadProduct();
+
+</script>
+
+</body>
+</html>

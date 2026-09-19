@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "name": "جاكيطة مستعملة",
+    "price": 100,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "جاكيطة مستعملة بحالة مزيانة",
+    "type": "jacket"
+  },
+  {
+    "id": 2,
+    "name": "سبرديلة مستعملة",
+    "price": 80,
+    "category": "صبابط",
+    "condition": "مزيانة",
+    "description": "سبرديلة مستعملة بحالة مزيانة",
+    "type": "shoes"
+  },
+  {
+    "id": 3,
+    "name": "Tshort",
+    "price": 120,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "Wa3ra"
+  },
+  {
+    "id": 4,
+    "name": "Tshort ",
+    "price": 120,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "",
+    "image": "IMG_20260726_004348_782.webp"
+  },
+  {
+    "id": 5,
+    "name": "Tshort ",
+    "price": 120,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "",
+    "image": "IMG_20260726_004348_782.webp"
+  },
+  {
+    "id": 6,
+    "name": "جاكيط",
+    "price": 120,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "",
+    "image": "b4cb2caf0512c3811270e24dee583c90.png"
+  },
+  {
+    "id": 7,
+    "name": "جاكيط",
+    "price": 120,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "",
+    "image": "9b6bf508b337a969bef685dde770b881.png"
+  },
+  {
+    "id": 8,
+    "name": "جاكيط",
+    "price": 120,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "",
+    "image": "6f95ca517c2213fe0ddcd50d590eac30.png"
+  },
+  {
+    "id": 9,
+    "name": "قبية",
+    "price": 150,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "جديدة بتيكي ديالها",
+    "image": "Screenshot_20260904-203142.png"
+  },
+  {
+    "id": 10,
+    "name": "سروال ",
+    "price": 120,
+    "category": "ملابس",
+    "condition": "بحال جديدة",
+    "description": "دجين ",
+    "source": "مول البال المحاميد",
+    "image": "Screenshot_20260913-180725.png"
+  }
+]

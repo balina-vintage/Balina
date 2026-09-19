@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "productName": "",
+    "price": "0 درهم",
+    "customerName": "وسيم",
+    "customerPhone": "0695865553",
+    "customerCity": "مراكش",
+    "customerAddress": "المحاميد",
+    "date": "17‏/9‏/2026، 16:32:46",
+    "status": "تم التأكيد"
+  },
+  {
+    "id": 2,
+    "productName": "",
+    "price": "0 درهم",
+    "customerName": "رشيد",
+    "customerPhone": "0687536456",
+    "customerCity": "مراكش",
+    "customerAddress": "المحاميد",
+    "date": "17‏/9‏/2026، 16:42:45",
+    "status": "ملغى"
+  },
+  {
+    "id": 3,
+    "productName": "جاكيط",
+    "price": "120 درهم",
+    "customerName": "ايوب",
+    "customerPhone": "0654882465",
+    "customerCity": "مراكش",
+    "customerAddress": "العزوزية",
+    "date": "17‏/9‏/2026، 16:56:10",
+    "status": "تم التسليم"
+  }
+]

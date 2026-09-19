@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Balina - لوحة التحكم</title>
+<style>
+    :root {
+      --gold: #C9A227;
+      --gold-light: #E5C158;
+      --black: #111;
+      --gray-light: #f5f5f5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    body {
+      background: var(--gray-light);
+      color: #222;
+      padding: 15px;
+    }
+
+    h1 {
+      background: var(--black);
+      color: var(--gold-light);
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--black);
+      margin-bottom: 15px;
+    }
+
+    a {
+      display: block;
+      text-align: center;
+      color: var(--gold);
+      font-weight: bold;
+      text-decoration: none;
+      margin-bottom: 15px;
+    }
+
+    #adminProducts > div {
+      background: white;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 3px 12px rgba(0,0,0,.1);
+    }
+
+    #adminProducts hr {
+      display: none;
+    }
+
+    #adminProducts h3 {
+      color: var(--black);
+      margin-bottom: 8px;
+    }
+
+    #adminProducts p {
+      color: #555;
+      line-height: 1.6;
+    }
+
+    #adminProducts button {
+      margin-top: 10px;
+      margin-left: 8px;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      background: var(--gold);
+      color: var(--black);
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>🛍️ Balina</h1>
+  <h2>لوحة التحكم</h2>
+
+  <a href="add-product.html">➕ إضافة منتج</a>
+<div id="adminProducts"></div>
+<h2 style="margin-top:30px;">📦 الطلبات</h2>
+<div id="adminOrders"></div>
+<script>
+fetch('/api/products')
+  .then(response => response.json())
+  .then(products => {
+    const container = document.getElementById('adminProducts');
+
+    products.forEach(product => {
+      const item = document.createElement('div');
+
+      item.innerHTML = `
+        <hr>
+        <h3>${product.name}</h3>
+        <p>الثمن: ${product.price} درهم</p>
+        <p>التصنيف: ${product.category}</p>
+        <p>الحالة: ${product.condition}</p>
+        <p>الوصف: ${product.description}</p>
+      `;
+item.innerHTML += `<button onclick="deleteProduct(${product.id})">🗑️ حذف</button>`;
+item.innerHTML += `<button onclick="window.location.href='edit-product.html?id=${product.id}'">✏️ تعديل</button>`;
+      container.appendChild(item);
+    });
+  });
+function updateOrderStatus(id, status) {
+  fetch('/api/orders/' + id, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      status: status
+    })
+  })
+    .then(response => response.json())
+    .then(() => {
+      alert('تم تحديث حالة الطلب ✅');
+    })
+    .catch(error => {
+      console.error(error);
+      alert('وقع مشكل، حاول مرة أخرى');
+    });
+}
+function deleteProduct(id) {
+if (!confirm('واش متأكد بغيتي تحيد هاد المنتج؟')) {
+    return;
+  }
+
+  fetch('/api/products/' + id, {
+    method: 'DELETE'
+  })
+    .then(response => response.json())
+    .then(() => {
+      location.reload();
+    });
+}
+function editProduct(id) {
+  const name = prompt('سمية المنتج الجديدة:');
+  if (name === null) return;
+
+  const price = prompt('الثمن الجديد:');
+  if (price === null) return;
+
+  const condition = prompt('الحالة الجديدة:');
+const description = prompt('الوصف الجديد:');
+if (description === null) return;
+  
+if (condition === null) return;
+
+  fetch('/api/products/' + id, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: name,
+      price: Number(price),
+      condition: condition,
+      description: description
+
+    })
+  })
+    .then(response => response.json())
+    .then(() => {
+      location.reload();
+    });
+}
+
+fetch('/api/orders')
+  .then(response => response.json())
+  .then(orders => {
+    const container = document.getElementById('adminOrders');
+
+    if (orders.length === 0) {
+      container.innerHTML = '<p style="text-align:center;">ما كاين حتى طلب دابا.</p>';
+      return;
+    }
+
+    orders.forEach(order => {
+      const item = document.createElement('div');
+
+      item.style.background = 'white';
+      item.style.borderRadius = '14px';
+      item.style.padding = '16px';
+      item.style.marginBottom = '12px';
+      item.style.boxShadow = '0 3px 12px rgba(0,0,0,.1)';
+
+      item.innerHTML = `
+        <h3 style="margin-bottom:10px;">📦 ${order.productName}</h3>
+        <p>💰 الثمن: ${order.price}</p>
+        <p>👤 الزبون: ${order.customerName}</p>
+        <p>📞 الهاتف: ${order.customerPhone}</p>
+<a href="https://wa.me/${order.customerPhone.replace(/^0/, '212')}" target="_blank"
+style="display:block; text-align:center; margin-top:10px; padding:12px; background:#25D366; color:white; border-radius:10px; text-decoration:none; font-weight:bold;">
+📱 التواصل مع الزبون عبر واتساب
+</a>        
+<p>🏙️ المدينة: ${order.customerCity}</p>
+        <p>📍 العنوان: ${order.customerAddress}</p>
+        <p>🕐 التاريخ: ${order.date}</p>
+<p>📌 الحالة: ${order.status || 'جديد'}</p>     
+<select onchange="updateOrderStatus(${order.id}, this.value)"
+  style="width:100%; padding:10px; margin-top:8px; border:1px solid #ddd; border-radius:8px;">
+  <option value="جديد" ${(!order.status || order.status === 'جديد') ? 'selected' : ''}>🟡 جديد</option>
+  <option value="تم التواصل" ${order.status === 'تم التواصل' ? 'selected' : ''}>🔵 تم التواصل</option>
+  <option value="تم التأكيد" ${order.status === 'تم التأكيد' ? 'selected' : ''}>🟢 تم التأكيد</option>
+  <option value="تم التسليم" ${order.status === 'تم التسليم' ? 'selected' : ''}>✅ تم التسليم</option>
+  <option value="ملغى" ${order.status === 'ملغى' ? 'selected' : ''}>🔴 ملغى</option>
+</select>
+ `;
+
+      container.appendChild(item);
+    });
+  })
+  .catch(error => {
+    console.error(error);
+  });
+</script>
+</body>
+</html>

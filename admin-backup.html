@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Balina - لوحة التحكم</title>
+</head>
+
+<body>
+
+  <h1>🛍️ Balina</h1>
+  <h2>لوحة التحكم</h2>
+
+  <a href="add-product.html">➕ إضافة منتج</a>
+<div id="adminProducts"></div>
+
+<script>
+fetch('/api/products')
+  .then(response => response.json())
+  .then(products => {
+    const container = document.getElementById('adminProducts');
+
+    products.forEach(product => {
+      const item = document.createElement('div');
+
+      item.innerHTML = `
+        <hr>
+        <h3>${product.name}</h3>
+        <p>الثمن: ${product.price} درهم</p>
+        <p>التصنيف: ${product.category}</p>
+        <p>الحالة: ${product.condition}</p>
+      `;
+item.innerHTML += `<button onclick="deleteProduct(${product.id})">🗑️ حذف</button>`;
+item.innerHTML += `<button onclick="editProduct(${product.id})">✏️ تعديل</button>`;
+      container.appendChild(item);
+    });
+  });
+function deleteProduct(id) {
+  if (!confirm('واش متأكد بغيتي تحيد هاد المنتج؟')) {
+    return;
+  }
+
+  fetch('/api/products/' + id, {
+    method: 'DELETE'
+  })
+    .then(response => response.json())
+    .then(() => {
+      location.reload();
+    });
+}
+function editProduct(id) {
+  const name = prompt('سمية المنتج الجديدة:');
+  if (name === null) return;
+
+  const price = prompt('الثمن الجديد:');
+  if (price === null) return;
+
+  const condition = prompt('الحالة الجديدة:');
+  if (condition === null) return;
+
+  fetch('/api/products/' + id, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: name,
+      price: Number(price),
+      condition: condition
+    })
+  })
+    .then(response => response.json())
+    .then(() => {
+      location.reload();
+    });
+}
+</script>
+</body>
+</html>

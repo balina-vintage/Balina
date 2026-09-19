@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Balina - تفاصيل المنتج</title>
+
+<style>
+  :root {
+    --gold: #C9A227;
+    --gold-light: #E5C158;
+    --black: #111;
+    --gray-light: #f5f5f5;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+
+  body {
+    background: var(--gray-light);
+    color: #222;
+  }
+
+  header {
+    background: var(--black);
+    color: white;
+    padding: 18px;
+    text-align: center;
+    border-bottom: 3px solid var(--gold);
+  }
+
+  header h1 {
+    color: var(--gold-light);
+    letter-spacing: 1px;
+  }
+
+  .container {
+    padding: 15px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* البانيير - نفس الستايل فوق وتحت */
+  .promo-banner {
+    margin: 20px 0;
+    padding: 26px 18px;
+    background-image: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url('/images/boutique.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid var(--gold);
+  }
+
+  .promo-tag {
+    font-size: 13px;
+    color: var(--gold);
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+
+  .promo-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+
+  .promo-text {
+    font-size: 14px;
+    color: #ccc;
+    line-height: 1.8;
+  }
+
+  .promo-btn {
+    margin-top: 18px;
+    display: inline-block;
+    padding: 11px 20px;
+    background: var(--gold);
+    color: #111;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  /* كادر المنتج - معزول ومحترف */
+  .product-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,.12);
+    border: 1px solid var(--gold);
+    margin: 20px 0;
+  }
+
+  .product-image {
+    height: 280px;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 90px;
+    position: relative;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+  }
+
+  #productGallery {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 10px 0;
+    background: #fafafa;
+    border-bottom: 1px solid #eee;
+  }
+
+  #productGallery img {
+    border-radius: 8px;
+    border: 2px solid transparent;
+  }
+
+  #productGallery img:hover {
+    border-color: var(--gold);
+  }
+
+  .info {
+    padding: 20px;
+    text-align: center;
+  }
+
+  h2 {
+    margin-bottom: 10px;
+    color: var(--black);
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .price {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 10px 0 16px;
+    color: var(--gold);
+  }
+
+  .details {
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 20px;
+    border-right: 3px solid var(--gold);
+    padding-right: 10px;
+    text-align: right;
+  }
+
+  .whatsapp {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: #25D366;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  .back {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    color: var(--black);
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  /* المودال ديال زووم الصورة */
+  #imageModal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,.92);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  #modalImage {
+    max-width: 90%;
+    max-height: 75%;
+    border-radius: 8px;
+  }
+
+  .modal-nav {
+    display: flex;
+    gap: 40px;
+    margin-top: 20px;
+  }
+
+  .modal-nav button {
+    background: var(--gold);
+    color: #111;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+  }
+</style>
+
+</head>
+
+<body>
+
+<header>
+  <h1>Balina 🛍️</h1>
+</header>
+
+<div class="container">
+
+  <!-- بانيير فوق -->
+  <div class="promo-banner">
+    <div class="promo-tag">✨ BALINA VINTAGE</div>
+    <div class="promo-title">أناقة مختلفة، بلمسة Vintage</div>
+    <div class="promo-text">
+      قطع Vintage مختارة بعناية ♻️<br>
+      ستايل • جودة • أثمنة مناسبة
+    </div>
+    <div class="promo-btn">تسوّق الآن 🛍️</div>
+  </div>
+
+  <!-- كادر المنتج، معزول -->
+  <div class="product-card">
+
+    <div class="product-image">
+      <img id="productImage" onclick="openImageModal()" src="" alt="صورة المنتج">
+    </div>
+
+    <div id="productGallery"></div>
+
+    <div class="info">
+      <h2>جاكيطة مستعملة</h2>
+      <div class="price">100 درهم</div>
+      <div class="details"></div>
+<a id="whatsappBtn" href="#" class="whatsapp" target="_blank">🛒 اطلب هاد المنتج عبر واتساب</a>
+<button id="orderBtn" class="whatsapp" onclick="openOrderForm()">📝 طلب عبر الموقع</button>
+      <a href="index.html" class="back">⬅ رجوع للمتجر</a>
+    </div>
+
+  </div>
+
+  <!-- بانيير تحت، نفس الستايل ديال لي فوق -->
+  <div class="promo-banner">
+    <div class="promo-tag">✨ BALINA VINTAGE</div>
+    <div class="promo-title">قطع مختارة بعناية</div>
+    <div class="promo-text">ستايل مختلف • أثمنة مناسبة</div>
+    <div class="promo-btn">اكتشف المزيد 🛍️</div>
+  </div>
+
+</div>
+<!-- فورم الطلب -->
+<div id="orderModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:10000; padding:20px; box-sizing:border-box;">
+
+  <div style="background:white; max-width:420px; margin:60px auto; padding:22px; border-radius:20px;">
+
+    <h2 style="text-align:center; margin-top:0;">📝 طلب المنتج</h2>
+<input id="customerName" type="text" placeholder="الاسم الكامل"
+  style="width:100%; padding:13px; margin-bottom:12px; box-sizing:border-box; border:1px solid #ddd; border-radius:10px;">
+
+<input id="customerPhone" type="tel" placeholder="رقم الهاتف"
+  style="width:100%; padding:13px; margin-bottom:12px; box-sizing:border-box; border:1px solid #ddd; border-radius:10px;">
+
+<input id="customerCity" type="text" placeholder="المدينة"
+  style="width:100%; padding:13px; margin-bottom:12px; box-sizing:border-box; border:1px solid #ddd; border-radius:10px;">
+<div id="citySuggestions" style="
+  display:none;
+  position:relative;
+  background:white;
+  border:1px solid #ddd;
+  border-radius:12px;
+  margin-top:-6px;
+  margin-bottom:12px;
+  max-height:220px;
+  overflow-y:auto;
+  box-shadow:0 5px 18px rgba(0,0,0,.12);
+  z-index:1000;
+"></div>
+
+
+    <textarea id="customerAddress" placeholder="العنوان"
+      style="width:100%; height:80px; padding:13px; margin-bottom:12px; box-sizing:border-box; border:1px solid #ddd; border-radius:10px;"></textarea>
+
+    <button onclick="submitOrder()"
+      style="width:100%; padding:14px; border:none; border-radius:10px; background:#111; color:white; font-size:16px; cursor:pointer;">
+      تأكيد الطلب ✅
+    </button>
+
+    <button onclick="closeOrderForm()"
+      style="width:100%; padding:12px; margin-top:10px; border:none; border-radius:10px; background:#eee; font-size:15px; cursor:pointer;">
+      إلغاء
+    </button>
+
+  </div>
+</div>
+<!-- مودال الزووم -->
+<div id="imageModal">
+  <img id="modalImage" src="" alt="">
+  <div class="modal-nav">
+    <button id="prevImage">›</button>
+    <button id="nextImage">‹</button>
+  </div>
+</div>
+
+<script>
+const moroccanCities = [
+  "أكادير","أصيلة","أزيلال","أسا","أزمور","آسفي","أرفود","أكلموس",
+  "الحسيمة","العرائش","الدار البيضاء","الرباط","طنجة","تطوان","مراكش",
+  "فاس","مكناس","وجدة","القنيطرة","الجديدة","خريبكة","بني ملال","سطات",
+  "تازة","تاونات","الحاجب","إفران","صفرو","بولمان","الرشيدية","ورزازات",
+  "زاكورة","تنغير","طاطا","كلميم","طانطان","السمارة","العيون","بوجدور",
+  "الداخلة"
+];
+
+const cityInput = document.getElementById('customerCity');
+const citySuggestions = document.getElementById('citySuggestions');
+cityInput.addEventListener('input', function () {
+  const query = this.value.trim();
+
+  if (!query) {
+    citySuggestions.style.display = 'none';
+    citySuggestions.innerHTML = '';
+    return;
+  }
+
+  const matches = moroccanCities.filter(city =>
+    city.includes(query)
+  );
+
+  citySuggestions.innerHTML = matches.map(city => `
+    <div
+      onclick="selectCity('${city}')"
+      style="
+        padding:13px 15px;
+        border-bottom:1px solid #eee;
+        cursor:pointer;
+        font-size:15px;
+      "
+    >
+      📍 ${city}
+    </div>
+  `).join('');
+
+  citySuggestions.style.display = matches.length ? 'block' : 'none';
+});
+function selectCity(city) {
+  cityInput.value = city;
+  citySuggestions.style.display = 'none';
+  citySuggestions.innerHTML = '';
+}
+let currentImageIndex = 0;
+let images = [];
+let currentProduct = null;
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+
+  if (id) {
+    fetch('/api/products')
+      .then(response => response.json())
+      .then(products => {
+const product = products.find(p => p.id === Number(id));
+if (!product) return;
+
+currentProduct = product;
+console.log('PRODUCT LOADED:', currentProduct);
+        document.querySelector('h2').textContent = product.name;
+        document.querySelector('.price').textContent = product.price + ' درهم';
+const waMessage = `السلام، بغيت نكومندي هاد المنتج: ${product.name} - ${product.price} درهم (رقم المنتج: ${product.id})`;
+        document.getElementById('whatsappBtn').href = 'https://wa.me/212687395300?text=' + encodeURIComponent(waMessage); 
+       document.getElementById('productImage').src = 'images/' + product.image;
+
+        document.querySelector('.details').innerHTML =
+          'الحالة: ' + product.condition + ' 👍<br>' +
+          'التصنيف: ' + product.category + '<br>' +
+          'المكان: مراكش<br>' +
+          'الوصف: ' + product.description;
+
+        images = product.images || [product.image];
+
+        const gallery = document.getElementById('productGallery');
+        gallery.innerHTML = '';
+        images.forEach((image, index) => {
+          const img = document.createElement('img');
+          img.src = 'images/' + image;
+          img.style.width = '65px';
+          img.style.height = '65px';
+          img.style.objectFit = 'cover';
+          img.style.margin = '5px';
+          img.style.cursor = 'pointer';
+          img.onclick = () => {
+            document.getElementById('productImage').src = 'images/' + image;
+            currentImageIndex = index;
+          };
+          gallery.appendChild(img);
+        });
+      });
+  }
+
+  function openImageModal() {
+    const mainImage = document.getElementById('productImage');
+    document.getElementById('modalImage').src = mainImage.src;
+    document.getElementById('imageModal').style.display = 'flex';
+  }
+
+  document.getElementById('imageModal').addEventListener('click', function(e) {
+    if (e.target === this) this.style.display = 'none';
+  });
+
+  document.getElementById('prevImage').onclick = function(e) {
+    e.stopPropagation();
+    if (images.length === 0) return;
+    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+    document.getElementById('modalImage').src = 'images/' + images[currentImageIndex];
+  };
+
+  document.getElementById('nextImage').onclick = function(e) {
+    e.stopPropagation();
+    if (images.length === 0) return;
+    currentImageIndex = (currentImageIndex + 1) % images.length;
+    document.getElementById('modalImage').src = 'images/' + images[currentImageIndex];
+  };
+
+  let touchStartX = 0, touchEndX = 0;
+  document.getElementById('modalImage').addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+  });
+  document.getElementById('modalImage').addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].clientX;
+    if (touchStartX - touchEndX > 50) document.getElementById('nextImage').click();
+    if (touchEndX - touchStartX > 50) document.getElementById('prevImage').click();
+  });
+function openOrderForm() {
+  document.getElementById('orderModal').style.display = 'block';
+}
+
+function closeOrderForm() {
+  document.getElementById('orderModal').style.display = 'none';
+}
+
+function submitOrder() {
+  const name = document.getElementById('customerName').value.trim();
+  const phone = document.getElementById('customerPhone').value.trim();
+  const city = document.getElementById('customerCity').value.trim();
+  const address = document.getElementById('customerAddress').value.trim();
+
+  if (!name || !phone || !city || !address) {
+    alert('عافاك عمر جميع المعلومات');
+    return;
+  }
+
+  fetch('/api/orders', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+productName: currentProduct ? currentProduct.name : '',
+price: currentProduct ? currentProduct.price + ' درهم' : '',
+      customerName: name,
+      customerPhone: phone,
+      customerCity: city,
+      customerAddress: address
+    })
+  })
+  .then(response => response.json())
+  .then(order => {
+    alert('تم إرسال الطلب بنجاح ✅');
+    closeOrderForm();
+
+    document.getElementById('customerName').value = '';
+    document.getElementById('customerPhone').value = '';
+    document.getElementById('customerCity').value = '';
+    document.getElementById('customerAddress').value = '';
+  })
+  .catch(error => {
+    console.error(error);
+    alert('وقع مشكل، حاول مرة أخرى');
+  });
+}
+
+</script>
+
+</body>
+</html>

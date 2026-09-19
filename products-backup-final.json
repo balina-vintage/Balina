@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "name": "جاكيطة تجريبية ",
+    "price": 130,
+    "category": "ملابس",
+    "condition": "ممتازة",
+    "description": "جاكيطة مستعملة بحالة مزيانة",
+    "type": "jacket"
+  },
+  {
+    "id": 2,
+    "name": "سبرديلة مستعملة",
+    "price": 80,
+    "category": "صبابط",
+    "condition": "مزيانة",
+    "description": "سبرديلة مستعملة بحالة مزيانة",
+    "type": "shoes"
+  },
+  {
+    "id": 5,
+    "name": "Jacket",
+    "price": 120,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "سلعة برانية",
+    "image": "images (2).jpeg",
+    "images": [
+      "images (2).jpeg",
+      "still-life-rendering-jackets-display_23-2149745030.jpg",
+      "images (1).jpeg",
+      "images.jpeg"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "جاكيط",
+    "price": 120,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "",
+    "image": "b4cb2caf0512c3811270e24dee583c90.png"
+  },
+  {
+    "id": 7,
+    "name": "جاكيط",
+    "price": 120,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "",
+    "image": "9b6bf508b337a969bef685dde770b881.png"
+  },
+  {
+    "id": 8,
+    "name": "اللخر",
+    "price": 140,
+    "category": "ملابس",
+    "condition": "واعرة",
+    "description": "برانية",
+    "image": "6f95ca517c2213fe0ddcd50d590eac30.png"
+  },
+  {
+    "id": 9,
+    "name": "قبية",
+    "price": 150,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "جديدة بتيكي ديالها",
+    "image": "Screenshot_20260904-203142.png"
+  },
+  {
+    "id": 14,
+    "name": "اللخر فالسبرديلة",
+    "price": 150,
+    "category": "ملابس",
+    "condition": "بحال جديدة",
+    "description": "جاية من برا",
+    "source": "مول البال",
+    "image": "Screenshot_20260916-160105.png"
+  },
+  {
+    "id": 15,
+    "name": "",
+    "price": 0,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "",
+    "source": "",
+    "images": [
+      "Screenshot_20260916-153959.png",
+      "Screenshot_20260915-154534.png"
+    ],
+    "image": "Screenshot_20260916-153959.png"
+  },
+  {
+    "id": 10,
+    "name": "",
+    "price": 0,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "",
+    "source": "",
+    "images": [
+      "Screenshot_20260916-153959.png",
+      "Screenshot_20260915-154534.png"
+    ],
+    "image": "Screenshot_20260916-153959.png"
+  },
+  {
+    "id": 11,
+    "name": "",
+    "price": 0,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "",
+    "source": "",
+    "images": []
+  },
+  {
+    "id": 12,
+    "name": "",
+    "price": 0,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "",
+    "source": "",
+    "images": []
+  },
+  {
+    "id": 13,
+    "name": "Tshirt nike",
+    "price": 90,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "سلعة برانية",
+    "source": "مول البال",
+    "images": [
+      "IMG_20260216_142105_423.jpg"
+    ],
+    "image": "IMG_20260216_142105_423.jpg"
+  }
+]

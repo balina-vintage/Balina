@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "name": "جاكيطة تجريبية ",
+    "price": 130,
+    "category": "ملابس",
+    "condition": "ممتازة",
+    "description": "جاكيطة مستعملة بحالة مزيانة",
+    "type": "jacket"
+  },
+  {
+    "id": 2,
+    "name": "سبرديلة مستعملة",
+    "price": 80,
+    "category": "صبابط",
+    "condition": "مزيانة",
+    "description": "سبرديلة مستعملة بحالة مزيانة",
+    "type": "shoes"
+  },
+  {
+    "id": 5,
+    "name": "Jacket",
+    "price": 120,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "سلعة برانية",
+    "image": "images (2).jpeg",
+    "images": [
+      "images (2).jpeg",
+      "still-life-rendering-jackets-display_23-2149745030.jpg",
+      "images (1).jpeg",
+      "images.jpeg"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "جاكيط",
+    "price": 120,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "",
+    "image": "b4cb2caf0512c3811270e24dee583c90.png"
+  },
+  {
+    "id": 7,
+    "name": "جاكيط",
+    "price": 120,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "",
+    "image": "9b6bf508b337a969bef685dde770b881.png"
+  },
+  {
+    "id": 8,
+    "name": "اللخر",
+    "price": 140,
+    "category": "ملابس",
+    "condition": "واعرة",
+    "description": "برانية",
+    "image": "6f95ca517c2213fe0ddcd50d590eac30.png"
+  },
+  {
+    "id": 9,
+    "name": "T-shirt real betis",
+    "price": 70,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "Ba9ii n9ii",
+    "image": "Screenshot_20260918-184124_1789753387063.jpg",
+    "images": [
+      "Screenshot_20260918-184124_1789753387063.jpg",
+      "Screenshot_20260918-184128_1789753349996.jpg",
+      "Screenshot_20260918-184131_1789753315573.jpg"
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Gotas adidas",
+    "price": 220,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "Ba9i n9i",
+    "source": "مول البال",
+    "image": "Screenshot_20260918-184713_1789753825036.jpg",
+    "images": [
+      "Screenshot_20260918-184713_1789753825036.jpg",
+      "Screenshot_20260918-184709_1789753805147.jpg",
+      "Screenshot_20260918-184722_1789753743766.jpg",
+      "Screenshot_20260918-184728_1789753715795.jpg"
+    ]
+  },
+  {
+    "id": 15,
+    "name": "",
+    "price": 0,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "",
+    "source": "",
+    "images": [
+      "Screenshot_20260916-153959.png",
+      "Screenshot_20260915-154534.png"
+    ],
+    "image": "Screenshot_20260916-153959.png"
+  },
+  {
+    "id": 10,
+    "name": "",
+    "price": 0,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "",
+    "source": "",
+    "images": [
+      "Screenshot_20260916-153959.png",
+      "Screenshot_20260915-154534.png"
+    ],
+    "image": "Screenshot_20260916-153959.png"
+  },
+  {
+    "id": 11,
+    "name": "",
+    "price": 0,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "",
+    "source": "",
+    "images": []
+  },
+  {
+    "id": 12,
+    "name": "طبلة",
+    "price": 550,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "",
+    "source": "",
+    "images": [
+      "Screenshot_20260918-182758.png"
+    ],
+    "image": "Screenshot_20260918-182758.png"
+  },
+  {
+    "id": 13,
+    "name": "Black jacket",
+    "price": 120,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "",
+    "source": "مول البال",
+    "images": [
+      "Screenshot_20260918-182628.png"
+    ],
+    "image": "Screenshot_20260918-182628.png"
+  },
+  {
+    "id": 16,
+    "name": "Table",
+    "price": 700,
+    "category": "أثاث",
+    "condition": "مزيانة",
+    "description": "طابلة الصالون معاها 3 صغار ",
+    "source": "",
+    "images": [
+      "Screenshot_20260918-183257_1789752985297.jpg",
+      "Screenshot_20260918-183312_1789752957940.jpg"
+    ],
+    "image": "Screenshot_20260918-183257_1789752985297.jpg"
+  },
+  {
+    "id": 17,
+    "name": "Diesel jeans jacket ",
+    "price": 130,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "Size L",
+    "source": "",
+    "images": [
+      "Screenshot_20260918-185820_1789754323363.jpg",
+      "Screenshot_20260918-185552_1789754268537.jpg",
+      "Screenshot_20260918-185607_1789754244722.jpg",
+      "Screenshot_20260918-185633_1789754224135.jpg"
+    ],
+    "image": "Screenshot_20260918-185820_1789754323363.jpg"
+  },
+  {
+    "id": 16,
+    "name": "kaskit mzal jdida 🇪🇺 ",
+    "price": 120,
+    "category": "ملابس",
+    "condition": "مزيانة",
+    "description": "",
+    "source": "",
+    "images": [
+      "Screenshot_20260918-191305_1789755322595.jpg",
+      "Screenshot_20260918-191315_1789755306596.jpg",
+      "Screenshot_20260918-191321_1789755272872.jpg",
+      "Screenshot_20260918-191252_1789755253133.jpg"
+    ],
+    "image": "Screenshot_20260918-191305_1789755322595.jpg"
+  }
+]
