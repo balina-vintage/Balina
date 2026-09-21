@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 const ADMIN_PASSWORD = '2bac svt';
